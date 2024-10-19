@@ -8,10 +8,11 @@ public class WhackAMole {
     int boardWidth = 600;
     int boardHeight = 650; //50 px for the text panel on top
 
-    JFrame frame = new JFrame("Mario: Whac A Mole");
-    JLabel textLabel = new JLabel();
-    JPanel textPanel = new JPanel();
-    JPanel boardPanel = new JPanel();
+    //Constructing the gui component
+    JFrame frame = new JFrame("Mr bean : Whack A Mole");
+    JLabel scoreLabel = new JLabel(); // Label to show the score
+    JPanel scorePanel = new JPanel(); // Panel to store the score label
+    JPanel boardPanel = new JPanel(); // We will store the buttons in this panel
     JButton[] board = new JButton[9];
     Levels levels = new Levels();
 
@@ -33,14 +34,14 @@ public class WhackAMole {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
 
-        textLabel.setFont(new Font("Arial",Font.PLAIN,50));
-        textLabel.setHorizontalAlignment(JLabel.CENTER);
-        textLabel.setText("Score: 0");
-        textLabel.setOpaque(true);
+        scoreLabel.setFont(new Font("Arial",Font.PLAIN,50));
+        scoreLabel.setHorizontalAlignment(JLabel.CENTER);
+        scoreLabel.setText("Score: 0");
+        scoreLabel.setOpaque(true);
 
-        textPanel.setLayout(new BorderLayout());
+        scorePanel.setLayout(new BorderLayout());
         boardPanel.setLayout(new GridLayout(3,3));
-        textPanel.add(textLabel);
+        scorePanel.add(scoreLabel);
 
         plant = levels.plantIcon;
         mole = levels.moleIcon;
@@ -58,10 +59,10 @@ public class WhackAMole {
                     JButton tile = (JButton) e.getSource();
                     if (tile == currMoleTile) {
                         score += 10;
-                        textLabel.setText("Score: " + Integer.toString(score));
+                        scoreLabel.setText("Score: " + Integer.toString(score));
                     }
                     else if (tile == currPlantTile) {
-                        textLabel.setText("Game Over . Your Score: " + Integer.toString(score));
+                        scoreLabel.setText("Game Over . Your Score: " + Integer.toString(score));
                         setMoleTimer.stop();
                         setPlantTimer.stop();
                         for (int i = 0; i < 9; i++) {
@@ -113,7 +114,7 @@ public class WhackAMole {
             }
         });
 
-        frame.add(textPanel,BorderLayout.NORTH);
+        frame.add(scorePanel,BorderLayout.NORTH);
         frame.add(boardPanel);
 
         setMoleTimer.start();
